@@ -8,7 +8,7 @@ Also Protractor will wait for Angular to finish updating the page.
 Protractor exposes some of the selenium-webdriver APIs via `browser.driver`.
 
 
-```
+```ts
 // import { By, WebElement } from 'selenium-webdriver'
 // selenium `By` is different from protractor `by`
 import { browser, by, element } from 'protractor'
@@ -32,7 +32,7 @@ i.e. calling `sendKeys()`, or `click()`
 
 ### Test scenario
 
-```
+```ts
 describe('creating the new contact', () => {
   beforeAll(() => {
     browser.get('/')
