@@ -22,7 +22,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynaminc/
 import { RouterTestingModule } from '@angular/router/testing'
 ```
 
-`async` waits for all asynchronous calls within the Zone.
+`async` waits for all asynchronous calls within the Zone. Tests will not execute until calls within the asynchronous test zone have been completed.
 
 `ComponentFixture` creates fixture(fixed state of a set of objects used as a baseline for running tests)
 
@@ -38,14 +38,18 @@ import { RouterTestingModule } from '@angular/router/testing'
 
 ### Pure Angular dependencies
 ```
+imoprt { FormsModule } from '@angular/forms'
 import { DebugElement } from '@angular/core'
 import { By } from '@angular/platform-browser'
 import { NoopAnimationsModule } from '@angular/platform-browser/animation'
 ```
-These utilities can be used in Angular projects as well as for writing tests.
+These modules and utilities can be used in Angular projects as well as for writing tests.
 
 ### Project specific dependencies
-
+```
+import { MessageModel, UtilityService, SharedCompoentOne } from '../shared'
+```
+Any project specific dependencies of the component we want to test should be injected.
 
 
 
