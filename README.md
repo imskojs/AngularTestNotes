@@ -50,6 +50,7 @@ These modules and utilities can be used in Angular projects as well as for writi
 import { MessageModel, UtilityService, SharedCompoentOne } from '../shared'
 ```
 Any project specific dependencies of the component we want to test should be injected.
+*Q: 3rd party libraries?*
 
 
 
