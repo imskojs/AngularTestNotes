@@ -125,6 +125,60 @@ describe('contact list', () => {
 ```
 
 We could create BasePageObject to be used to extend other pageObjects to remove DRY codes.
+However, I believe e2e test is procedural. every line of code represents user's behaviour in some way.  
+eg)
+```ts
+// Selecting of an element can represent user seeing the element.
+const $usernameInput = $('.login-username-input');
+
+// Typing is represented with sendKeys method.
+$usernameInput.sendKeys('imskojs');
+
+// Where as by using PageObject procedure is aggregated. Which reduces code but at a cost of not aggregating procedures
+const loginPage = new LoginPageObject()
+loginPage.login()
+```
+
+### Expected Conditions `EC`
+
+#### `EC` facts
+* `EC` can be assigned to variables.
+* `EC` holds reference to the `browser` object.
+* Because of above reason get the new reference to `EC` after restarting or new-windowing the browser.
+* Because of above reason use `browser.ExpectedConditions` rather than `protractor.ExpectedConditions`.
+* `EC` is a function that returns a `Promise` that returns `Boolean` when resolved.
+
+
+
+### `browser.wait`'s custom conditions (other than `EC`)
+`browser.wait` will intermittently call the call back function until it returns true.
+This call back function can return a promise. *Q: calls promise returning call back repeatedly? how does that work?*
+I guess when the callback returns a promise `browser.wait` will wait for the returned promise to resolve.  
+
+#### browser.executeScript
+`WebDriver` gets the DOM element from our app using `browser.driver.executeScript` which returns DOM wrapped class `WebElement` class, which protractor wraps to give us `ElementFinder` instance which we use to call methods on such as `sendKeys()`.  
+We can get [WebElement](https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/WebElement.html) from 
+[ElementFinder](http://www.protractortest.org/#/api?view=ElementFinder) using `ElementFinder`'s `getWebElement`.
+
+We could use `browser.driver.executeScript` manually;
+```ts
+function $getOrderBook() {
+  return document.querySelectorAll('.order-book');
+}
+browser.wait(() => {
+  // $getOrderBook is run in the browser context where our real web app is running.
+  return browser.dirver.executeScript($getOrderBook)
+    .then((orderBooks: WebElement[]) => {
+      return orderBooks.length >= 2;
+    })
+})
+```
+
+
+
+
+
+
 
 Good Exmples;
 https://github.com/testing-angular-applications/testing-angular-applications/tree/master/chapter08/e2e
