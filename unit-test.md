@@ -14,7 +14,7 @@ Dependencies that a parent component may use include;
 3) Project specific dependencies
 
 ### Testing module dependencies
-```
+```ts
 import {TestBed, async, fakeAsync, ComponentFixture, tick} from '@angular/core/testing
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynaminc/testing'
 import { RouterTestingModule } from '@angular/router/testing'
@@ -35,7 +35,7 @@ import { RouterTestingModule } from '@angular/router/testing'
 
 
 ### Pure Angular dependencies
-```
+```ts
 imoprt { FormsModule } from '@angular/forms'
 import { DebugElement } from '@angular/core'
 import { By } from '@angular/platform-browser'
@@ -44,7 +44,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animation'
 These modules and utilities can be used in Angular projects as well as for writing tests.
 
 ### Project specific dependencies
-```
+```ts
 import { MessageModel, UtilityService, SharedCompoentOne } from '../shared'
 ```
 Any project specific dependencies of the component we want to test should be injected.
