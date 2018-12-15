@@ -256,6 +256,8 @@ describe('Buying Page', async () => {
 
 More over we can use Chrome DevTools to debug our e2e test!
 
+### TODO: USING CHROME DEVTOOLS
+
 
 
 Good Exmples;  
