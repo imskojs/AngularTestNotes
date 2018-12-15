@@ -174,13 +174,56 @@ browser.wait(() => {
 })
 ```
 
+### Angular Zone
+Protractor waits until there are no more tasks pending in the Angular Zone.
+So if you poll http requests using setInterval or recursive setTimeout, they will constantly creates tasks in Angular Zone.
+As Protractor waits for the pending tasks in Angular Zone, it will wait forever for interval to be cleared.
+We can put this polling logic outside of angular zone by;
+`ngZone.runOutsideAngular(() => { /* logic here */ })`
+
+So for Example if we have;
+```ts
+// all imports omitted
+@Component({
+  // omitted
+});
+class SomeComponent implements OnInit {
+  ngOnInit() {
+    interval(500).pipe(
+      // Some logic
+    ).subscribe(x => this.x = x)
+  }
+}
+```
+Protractor will wait forever.
+But if we change the code to;
+```ts
+// all imports omitted
+@Component({
+  // omitted
+});
+class SomeComponent implements OnInit {
+  
+  constructor(private zone: NgZone) {}
+  
+  ngOnInit() {
+    this.zone.runOutsideAngular(() => {
+      interval(500).pipe(
+        // Some logic
+      ).subscribe(x => {
+        this.zone.run(() => {
+          this.x = x;
+        })
+      })
+    })    
+  }
+}
+```
+Above code will run `interval` outside the angular zone but when we get the result we will run it in a zone `zone.run`.
+This way `interval` resides in browser eventloop and not angular zone.
 
 
-
-
-
-
-Good Exmples;
+Good Exmples;  
 https://github.com/testing-angular-applications/testing-angular-applications/tree/master/chapter08/e2e
 
 
