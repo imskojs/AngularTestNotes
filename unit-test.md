@@ -36,7 +36,7 @@ import { RouterTestingModule } from '@angular/router/testing'
 
 ### Pure Angular dependencies
 ```ts
-imoprt { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms'
 import { DebugElement } from '@angular/core'
 import { By } from '@angular/platform-browser'
 import { NoopAnimationsModule } from '@angular/platform-browser/animation'
