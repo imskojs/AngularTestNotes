@@ -1,4 +1,4 @@
-# Unit Test
+# Unit Test in Angular
 
 ### Isolated tests
 Don't need any Angular dependencies. Used to ensure that the component is created correctly.
