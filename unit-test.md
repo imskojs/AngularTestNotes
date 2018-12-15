@@ -1,6 +1,4 @@
-# AngularTestNotes
-Notes from learning Angular tests
-
+# Unit Test
 
 ### Isolated tests
 Don't need any Angular dependencies. Used to ensure that the component is created correctly.
