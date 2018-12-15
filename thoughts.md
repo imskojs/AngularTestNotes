@@ -1,4 +1,4 @@
-# Why? Why?! WHY!?!?!?!??!?! and some answers
+# Why? Why?! WHY!?!?! and some answers
 
 ### Why use beforeAll?
 Errors in before* blocks are not critical and won't prevent the list of specs from being populated and specs from being run.
