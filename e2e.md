@@ -222,6 +222,41 @@ class SomeComponent implements OnInit {
 Above code will run `interval` outside the angular zone but when we get the result we will run it in a zone `zone.run`.
 This way `interval` resides in browser eventloop and not angular zone.
 
+### WebDriver Control Flow
+Protractor's methods seems to run as though they are syncronous. It was made possible with managed promise.
+managed promise don't run async task, it adds tasks to run on Webdriver's control flow.
+control flow runs all the added tasks at the end of `it()` block.
+
+*NOTE: managed promise is a superset of normal promise, meaning we can either use it like sync or treat it like a normal promise*  
+
+All these work to make the code look syncronous. But there are caveats such as;  
+* Use of control flow prevents us from debugging Protractor tests with standard Node.js tools.
+
+#### We should use `async/await`
+We can disable WebDriver Control Flow by adding;  
+`SELENIUM_PROMISE_MANAGER: false` to our Protractor config.  
+*NOTE: Selenium >= 4.x removes control flow permanently, so above option is the only option*  
+Now with our new knowledge the code would look something like;
+```ts
+import { browser, by, element } from 'protractor'
+describe('Buying Page', async () => {
+  
+  const buyButton = $('.buy-button');
+  const listContainer = $('list-container');
+  
+  await browser.get('/');
+  await buyButton.click();
+  const textInContainer = await listContainer.getText();
+  
+  expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl + '/')
+  expect(textInContainer).toContain('1000원');
+  
+});
+```
+
+More over we can use Chrome DevTools to debug our e2e test!
+
+
 
 Good Exmples;  
 https://github.com/testing-angular-applications/testing-angular-applications/tree/master/chapter08/e2e
