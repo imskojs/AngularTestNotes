@@ -15,7 +15,7 @@ Dependencies that a parent component may use include;
 
 ### Testing module dependencies
 ```ts
-import {TestBed, async, fakeAsync, ComponentFixture, tick} from '@angular/core/testing
+import {TestBed, async, fakeAsync, ComponentFixture, tick} from '@angular/core/testing'
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynaminc/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 ```
