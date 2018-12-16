@@ -256,7 +256,22 @@ describe('Buying Page', async () => {
 
 More over we can use Chrome DevTools to debug our e2e test!
 
-### TODO: USING CHROME DEVTOOLS
+### USING CHROME DEVTOOLS
+Node.js v6+ has the ability to debug any node.js programs using Chrome browser's DevTools.
+
+
+To debug angular e2e tests, we should set `SELEMIUM_PROMISE_MANAGER: false` in `protractor.conf.js`.  
+Add `debugger` statement to the line in a file you are writing e2e test such as in a `stuff.e2e-spec.js` file.
+Then run node in `--inspect` mode.  
+Since `ng e2e` runs local protractor binary we have to write;
+
+```bash
+node --inspect --debug-brk ./node_modules/protractor/bin/protractor
+```
+
+*NOTE: protractor will use protractor.conf.js by default*
+
+Then in Chrome go to `about://inspect` --> "Open dedicated DevTools for Node"
 
 
 
