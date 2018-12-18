@@ -63,6 +63,10 @@ but rather will fake it (with a mock).
 
 When creating a fake it is important that the fake object has the same type as the real one. (Typescript helps here)
 
+### Set up
+```ts
+```
+
 
 
 
