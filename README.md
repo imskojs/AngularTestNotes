@@ -7,4 +7,4 @@ Notes from learning Angular tests
 * [thoughts](https://github.com/imskojs/AngularTestNotes/blob/master/thoughts.md)
 
 
-* Reference: https://www.manning.com/books/testing-angular-applications *
+** Reference: https://www.manning.com/books/testing-angular-applications **
