@@ -20,11 +20,11 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynaminc/
 import { RouterTestingModule } from '@angular/router/testing'
 ```
 
-`async` waits for all asynchronous calls within the Zone. Tests will not execute until calls within the asynchronous test zone have been completed.
+`async` waits for all asynchronous calls within the Zone. Tests will not execute until calls within the asynchronous test zone have been completed. I think `async` should not be used as it could make the unit test to run for long time. use `fakeAsync` instead.
 
 `ComponentFixture` creates fixture(fixed state of a set of objects used as a baseline for running tests)
 
-`TestBed` container that connects dependencies.
+`TestBed` container that connects dependencies, and fakes.
 
 `fakeAsync` run asynchronous functions as if they were synchronous.  
 `tick` is used with `fakeAsync` to forward in milliseconds.
@@ -64,10 +64,11 @@ but rather will fake it (with a mock).
 When creating a fake it is important that the fake object has the same type as the real one. (Typescript helps here)
 
 
-### Set up gotchas
-1) When configuring `TestBed.configureTestingModule`, only use Modules, Components, Providers that the component we are testing uses.
+### Set up tips
+1) When configuring `TestBed.configureTestingModule`, only use Modules, Components, Providers that the component we are testing uses. I think in order to recognize all dependencies one should be aware of angular modules a component uses that most of the devs would just take it as granted. For example usage of `[ngModel]` in the component we are testing requires us to import `FormModule` in the `TestBed`. 
 2) Use mocks for Services with `providers[{provide: UserService, useValue: userServiceStub}]`
 3) Any component that gets loaded lazily should be included in `TestBed.overrideModule(BrowserDynamicTestingModule, { ... })`
+4) Add codes for `TestBed.configureTestingModule` in one `beforeEach` 
 
 
 
