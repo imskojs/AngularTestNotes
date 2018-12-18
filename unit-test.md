@@ -63,10 +63,11 @@ but rather will fake it (with a mock).
 
 When creating a fake it is important that the fake object has the same type as the real one. (Typescript helps here)
 
-### Set up
-```ts
-```
 
+### Set up gotchas
+1) When configuring `TestBed.configureTestingModule`, only use Modules, Components, Providers that the component we are testing uses.
+2) Use mocks for Services with `providers[{provide: UserService, useValue: userServiceStub}]`
+3) Any component that gets loaded lazily should be included in `TestBed.overrideModule(BrowserDynamicTestingModule, { ... })`
 
 
 
